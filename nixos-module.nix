@@ -15,12 +15,18 @@ let
   mergeAttrsList = foldl mergeAttrs {};
 
   containerOpts = types.submodule (import ./container.nix { inherit quadletUtils; } );
+  podOpts = types.submodule (import ./pod.nix { inherit quadletUtils pkgs; } );
   networkOpts = types.submodule (import ./network.nix { inherit quadletUtils pkgs; } );
 in {
   options = {
     virtualisation.quadlet = {
       containers = mkOption {
         type = types.attrsOf containerOpts;
+        default = { };
+      };
+
+      pods = mkOption {
+        type = types.attrsOf podOpts;
         default = { };
       };
 
@@ -32,7 +38,7 @@ in {
   };
 
   config = let
-    allObjects = (attrValues cfg.containers) ++ (attrValues cfg.networks);
+    allObjects = (attrValues cfg.containers) ++ (attrValues cfg.pods) ++ (attrValues cfg.networks);
   in {
     virtualisation.podman.enable = true;
     environment.etc = mergeAttrsList (

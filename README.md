@@ -55,4 +55,4 @@ Compared to alternatives like [`virtualisation.oci-containers`](https://github.c
 }
 ```
 
-See [`container.nix`](./container.nix) and [`network.nix`](./network.nix) for all options.
+See [`container.nix`](./container.nix), [`pod.nix`](./pod.nix) and [`network.nix`](./network.nix) for all options.

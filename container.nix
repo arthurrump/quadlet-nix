@@ -273,6 +273,14 @@ let
       property = "Notify";
     };
 
+    pod = quadletUtils.mkOption {
+      type = types.nullOr types.str;
+      default = null;
+      example = "foo.pod";
+      description = "--pod";
+      property = "Pod";
+    };
+
     podmanArgs = quadletUtils.mkOption {
       type = types.listOf types.str;
       default = [ ];
